@@ -31,9 +31,9 @@
   "stackFront":      {"ru": "Фронтенд", "en": "Frontend", "label": "Колонка 1: заголовок", "section": "Стек"},
   "stackFrontItems": {"ru": "TypeScript · React · Next.js · Tailwind CSS", "en": "TypeScript · React · Next.js · Tailwind CSS", "label": "Колонка 1: список", "section": "Стек"},
   "stackBack":       {"ru": "Бэкенд", "en": "Backend", "label": "Колонка 2: заголовок", "section": "Стек"},
-  "stackBackItems":  {"ru": "Node.js · PostgreSQL · Redis · REST / GraphQL", "en": "Node.js · PostgreSQL · Redis · REST / GraphQL", "label": "Колонка 2: список", "section": "Стек"},
+  "stackBackItems":  {"ru": "Python · PHP · PostgreSQL · Redis", "en": "Python · PHP · PostgreSQL · Redis", "label": "Колонка 2: список", "section": "Стек"},
   "stackInfra":      {"ru": "Инфраструктура", "en": "Infrastructure", "label": "Колонка 3: заголовок", "section": "Стек"},
-  "stackInfraItems": {"ru": "Docker · CI/CD · Vercel · VPS", "en": "Docker · CI/CD · Vercel · VPS", "label": "Колонка 3: список", "section": "Стек"},
+  "stackInfraItems": {"ru": "Docker · GitHub Actions · nginx", "en": "Docker · GitHub Actions · nginx", "label": "Колонка 3: список", "section": "Стек"},
 
   "ctaTitle": {"ru": "Расскажите о задаче", "en": "Tell us about your project", "label": "Заголовок CTA", "section": "CTA"},
   "ctaText":  {"ru": "Опишите задачу в паре предложений. В течение дня вернёмся с оценкой сроков и стоимости.", "en": "Describe your task in a couple of sentences. Within a day we will get back with a time and cost estimate.", "label": "Текст CTA", "section": "CTA"},

@@ -207,12 +207,45 @@ def _005_copy_polish(session: Session) -> None:
             row.updated_at = utcnow()
 
 
+def _006_stack_and_terminal(session: Session) -> None:
+    """Стек без свалки брендов, терминал согласован с python-бэкендом."""
+    stack = {
+        "stackBackItems": "Python · PHP · PostgreSQL · Redis",
+        "stackInfraItems": "Docker · GitHub Actions · nginx",
+    }
+    for key, value in stack.items():
+        row = session.get(Content, key)
+        if row is not None:
+            row.ru = value
+            row.en = value
+            row.updated_at = utcnow()
+    lines = {
+        "backend · node + postgres": (
+            "ok",
+            "backend · python + postgresql",
+            "backend · python + postgresql",
+        ),
+        "тесты пройдены (128/128)": (
+            "ok",
+            "uvicorn запущен на :8000",
+            "uvicorn running on :8000",
+        ),
+    }
+    for old_ru, (kind, ru, en) in lines.items():
+        for line in session.query(TerminalLine).filter(TerminalLine.ru == old_ru).all():
+            line.kind = kind
+            line.ru = ru
+            line.en = en
+            line.updated_at = utcnow()
+
+
 MIGRATIONS = [
     ("001_rebrand_atrice", _001_rebrand_atrice),
     ("002_strip_ai_markers", _002_strip_ai_markers),
     ("003_terminal_lines", _003_terminal_lines),
     ("004_copy_update", _004_copy_update),
     ("005_copy_polish", _005_copy_polish),
+    ("006_stack_and_terminal", _006_stack_and_terminal),
 ]
 
 

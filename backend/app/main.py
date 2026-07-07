@@ -42,7 +42,13 @@ def create_app() -> FastAPI:
             seed_terminal_if_empty(session, terminal_seed_path)
         yield
 
-    app = FastAPI(title="prodev-landing", lifespan=lifespan)
+    app = FastAPI(
+        title="atrice-landing",
+        lifespan=lifespan,
+        docs_url=None,
+        redoc_url=None,
+        openapi_url=None,
+    )
     app.state.sessionmaker = sessionmaker(bind=engine)
     app.state.admin_password = os.environ.get("ADMIN_PASSWORD", "admin")
     app.state.secret_key = os.environ.get("SECRET_KEY", "dev-secret-change-me")
