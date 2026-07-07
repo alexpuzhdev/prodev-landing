@@ -7,3 +7,12 @@ services:
     volumes:
       - ./data:/srv/data
     restart: unless-stopped
+
+  bot:
+    build: ./bot
+    env_file: .env
+    environment:
+      BACKEND_URL: http://app:8000
+    depends_on:
+      - app
+    restart: unless-stopped

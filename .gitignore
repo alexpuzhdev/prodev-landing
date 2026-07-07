@@ -23,3 +23,6 @@ data/
 
 # Playwright artifacts
 .playwright-mcp/
+
+# Bot
+bot/.venv/

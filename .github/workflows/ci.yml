@@ -14,8 +14,8 @@ jobs:
           python-version: "3.12"
       # -e обязателен: обычная установка уводит app/__file__ в site-packages,
       # и дефолтный SEED_PATH (backend/../shared) перестаёт существовать
-      - run: pip install -e "./backend[dev]"
-      - run: ruff check backend
+      - run: pip install -e "./backend[dev]" ruff
+      - run: ruff check backend bot
       - run: pytest backend/tests -v
 
   frontend:
@@ -38,4 +38,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t prodev-landing .
+      - run: docker build -t atrice-landing .
+      - run: docker build -t atrice-bot ./bot
