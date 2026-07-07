@@ -68,6 +68,7 @@ Frontend:
 
 ## Прод
 
-- http://91.207.75.217:8000 (админка `/admin`).
+- https://alexander.puzh.dev.hlab.kz (nginx + Let's Encrypt на VPS 91.207.75.217, приложение слушает 127.0.0.1:8000).
+- Админка `/admin`: доступ только с IP из env `ADMIN_ALLOWED_IPS`, cookie с флагом Secure (`COOKIE_SECURE=1`).
 - Деплой: пуш в `main`, затем CI, затем `deploy.yml` (SSH под `deploy` на VPS, каталог `~/prodev-landing`, `git pull && docker compose up -d --build`).
 - Секреты в репе: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`.

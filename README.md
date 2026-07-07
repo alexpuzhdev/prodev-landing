@@ -23,10 +23,12 @@ cd frontend && npm install && npm run dev   # http://localhost:5173, /api про
 
 ## Деплой
 
-Прод: http://91.207.75.217:8000 (пользователь `deploy`, каталог `~/prodev-landing`).
+Прод: https://alexander.puzh.dev.hlab.kz (nginx + Let's Encrypt, приложение слушает
+только 127.0.0.1:8000; пользователь `deploy`, каталог `~/prodev-landing`).
 Каждый пуш в `main` после зеленого CI автоматически деплоится на VPS: GitHub Actions
 заходит по SSH и выполняет `git pull && docker compose up -d --build`.
 Секреты: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY` в настройках репозитория.
+Админка доступна только с IP из `ADMIN_ALLOWED_IPS` (см. `.env.example`).
 
 ## Как это устроено
 
