@@ -1,0 +1,53 @@
+.admin {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+  font-family: var(--sans);
+  color: var(--ink);
+}
+.admin h1 { font-size: 32px; margin: 0 0 32px; }
+.admin h2 { font-size: 20px; margin: 40px 0 16px; }
+.admin-login {
+  max-width: 380px;
+  margin: 120px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.admin-login input,
+.admin-row textarea {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  box-sizing: border-box;
+  width: 100%;
+}
+.admin-login button,
+.admin-row button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.admin-row button:disabled { opacity: 0.5; cursor: default; }
+.admin-row {
+  display: grid;
+  grid-template-columns: 220px 1fr 1fr 120px;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.admin-row .admin-label { font-size: 14px; padding-top: 10px; }
+.admin-row .admin-key { display: block; font-size: 12px; opacity: 0.6; }
+.admin-error { color: #b3261e; font-size: 14px; }
+.admin-saved { color: #2e7d32; font-size: 14px; }
+@media (max-width: 800px) {
+  .admin-row { grid-template-columns: 1fr; }
+}
