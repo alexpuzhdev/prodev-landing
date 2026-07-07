@@ -21,6 +21,13 @@ cd backend && pip install -e ".[dev]" && uvicorn app.main:app --reload
 cd frontend && npm install && npm run dev   # http://localhost:5173, /api проксируется на :8000
 ```
 
+## Деплой
+
+Прод: http://91.207.75.217:8000 (пользователь `deploy`, каталог `~/prodev-landing`).
+Каждый пуш в `main` после зелёного CI автоматически деплоится на VPS
+(GitHub Actions → SSH → `git pull && docker compose up -d --build`).
+Секреты: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY` в настройках репозитория.
+
 ## Как это устроено
 
 - Все тексты лендинга (RU/EN) лежат в SQLite и редактируются через `/admin`.
