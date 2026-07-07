@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>prodev.team — студия full-stack разработки</title>
+<meta name="description" content="Проектируем, разрабатываем и запускаем веб-приложения, лендинги и MVP. Полный цикл — от идеи до продакшена.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23d97757'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0eee6;
+    --paper: #faf9f5;
+    --ink: #141413;
+    --accent: #d97757;
+    --line: #e5e7eb;
+    --terminal-bg: #1a1917;
+    --sans: 'Anthropic Sans', 'Golos Text', Arial, sans-serif;
+    --serif: 'Anthropic Serif', 'Source Serif 4', Georgia, serif;
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatY {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+  @keyframes spinSlow {
+    from { transform: rotate(45deg); }
+    to { transform: rotate(405deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  [hidden] { display: none !important; }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 32px;
+    flex-wrap: wrap;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo-dot {
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .site-nav a {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .site-nav a:hover { text-decoration: underline; }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .lang-switch {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .lang-switch button {
+    border: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    color: var(--ink);
+  }
+  .lang-switch button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 8px 16px;
+    min-height: 40px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-dark { background: var(--ink); color: var(--paper); }
+  .btn-dark:hover { background: #333330; }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn-outline:hover { background: rgba(20, 20, 19, 0.06); }
+  .btn-light { background: var(--paper); color: var(--ink); }
+  .btn-light:hover { background: #ffffff; }
+  .btn-wide { min-width: 120px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 32px 52px;
+    position: relative;
+  }
+  .hero-shape-ring {
+    position: absolute;
+    top: 70px;
+    right: 60px;
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: floatY 7s ease-in-out infinite;
+  }
+  .hero-shape-dot {
+    position: absolute;
+    top: 180px;
+    right: 150px;
+    width: 26px;
+    height: 26px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: floatY 5s ease-in-out infinite;
+  }
+  .hero-shape-square {
+    position: absolute;
+    top: 40px;
+    right: 220px;
+    width: 20px;
+    height: 20px;
+    background: var(--ink);
+    animation: spinSlow 14s linear infinite;
+  }
+  .hero-kicker {
+    font-family: var(--serif);
+    font-size: 16px;
+    margin: 0 0 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 52px;
+    align-items: end;
+  }
+  .hero h1 {
+    font-size: 58px;
+    line-height: 1.06;
+    font-weight: 700;
+    margin: 0;
+    text-wrap: balance;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+  .hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+  .hero-side p {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Terminal ---------- */
+  .terminal-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 32px 76px;
+    animation: fadeUp 0.7s ease 0.35s both;
+  }
+  .terminal {
+    background: var(--terminal-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(20, 20, 19, 0.08);
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(250, 249, 245, 0.1);
+  }
+  .terminal-bar .light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(250, 249, 245, 0.25);
+  }
+  .terminal-bar .light-accent { background: var(--accent); }
+  .terminal-title {
+    margin-left: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: rgba(250, 249, 245, 0.5);
+  }
+  .terminal-body {
+    padding: 24px 28px;
+    min-height: 190px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.75;
+  }
+  .terminal-body .t-prompt { color: var(--accent); }
+  .terminal-body .t-cmd { color: #faf9f5; }
+  .terminal-body .t-ok { color: #8fc98f; }
+  .terminal-body .t-info { color: var(--accent); }
+  .terminal-body .t-text { color: rgba(250, 249, 245, 0.75); }
+  .terminal-cursor {
+    display: inline-block;
+    width: 9px;
+    height: 18px;
+    background: var(--accent);
+    vertical-align: middle;
+  }
+  .terminal-cursor.off { opacity: 0; }
+
+  /* ---------- Sections ---------- */
+  .section { border-top: 1px solid var(--line); }
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 76px 32px;
+  }
+  .section h2 {
+    font-size: 39px;
+    line-height: 1.2;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 52px;
+  }
+  .about-head {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .about-shapes {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .about-shapes span { width: 44px; height: 44px; }
+  .shape-circle-fill { background: var(--accent); border-radius: 50%; }
+  .shape-circle-line { border: 2px solid var(--ink); border-radius: 50%; }
+  .shape-square-fill { background: var(--ink); border-radius: 8px; }
+  .shape-square-line { border: 2px solid var(--accent); border-radius: 8px; transform: rotate(45deg); }
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .about-text p { margin: 0; }
+
+  /* ---------- Services ---------- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 52px;
+  }
+  .service-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s, border-color 0.2s;
+    background: var(--bg);
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--ink);
+  }
+  .service-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .service-card p {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .icon-circle { width: 28px; height: 28px; background: var(--accent); border-radius: 50%; }
+  .icon-square-line { width: 28px; height: 28px; border: 2px solid var(--ink); border-radius: 4px; }
+  .icon-diamond { width: 28px; height: 28px; background: var(--ink); transform: rotate(45deg); margin: 2px; }
+  .icon-arch { width: 28px; height: 14px; background: var(--accent); border-radius: 14px 14px 0 0; margin-top: 14px; }
+
+  /* ---------- Stack ---------- */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 52px;
+    margin-top: 52px;
+  }
+  .stack-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .stack-col h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .stack-col p {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .stack-dot-accent { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+  .stack-dot-ink { width: 10px; height: 10px; background: var(--ink); flex-shrink: 0; }
+  .stack-dot-ring { width: 10px; height: 10px; border: 2px solid var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+  /* ---------- CTA ---------- */
+  .cta-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px 76px;
+  }
+  .cta {
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 16px;
+    padding: 76px 52px;
+    margin-top: 76px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-shape-ring {
+    position: absolute;
+    top: -60px;
+    right: -40px;
+    width: 220px;
+    height: 220px;
+    border: 2px solid rgba(217, 119, 87, 0.6);
+    border-radius: 50%;
+    animation: floatY 8s ease-in-out infinite;
+  }
+  .cta-shape-dot {
+    position: absolute;
+    bottom: -30px;
+    right: 150px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: floatY 6s ease-in-out infinite;
+  }
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    position: relative;
+  }
+  .cta h2 {
+    font-size: 44px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin: 0;
+  }
+  .cta p {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0;
+    max-width: 560px;
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 76px 32px 40px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 52px;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 52px;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 22px;
+  }
+  .footer-logo .logo-dot { width: 18px; height: 18px; }
+  .footer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .footer-copy {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: rgba(250, 249, 245, 0.6);
+  }
+  .footer-social { display: flex; gap: 20px; }
+  .footer-social a {
+    color: rgba(250, 249, 245, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .footer-social a:hover { color: var(--paper); }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .footer-col-title { font-size: 14px; font-weight: 500; }
+  .footer-col a, .footer-note {
+    color: rgba(250, 249, 245, 0.7);
+    text-decoration: none;
+    font-family: var(--serif);
+    font-size: 14px;
+  }
+  .footer-col a:hover { color: var(--paper); }
+
+  /* ---------- Scroll square ---------- */
+  .scroll-square {
+    position: fixed;
+    right: 36px;
+    bottom: 36px;
+    width: 22px;
+    height: 22px;
+    background: var(--accent);
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .hero { padding-top: 64px; }
+    .hero h1 { font-size: 44px; }
+    .hero-grid, .about-grid, .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero-grid { align-items: start; }
+    .stack-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-shape-ring { width: 80px; height: 80px; right: 24px; top: 24px; }
+    .hero-shape-dot { right: 90px; top: 96px; }
+    .hero-shape-square { right: 140px; top: 20px; }
+  }
+  @media (max-width: 720px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .site-nav { display: none; }
+    .section-inner { padding: 52px 20px; }
+    .wrap, .site-header, .hero, .terminal-section, .cta-section { padding-left: 20px; padding-right: 20px; }
+    .hero h1 { font-size: 36px; }
+    .section h2 { font-size: 30px; }
+    .cta { padding: 52px 28px; }
+    .cta h2 { font-size: 32px; }
+    .footer-inner { padding: 52px 20px 32px; }
+    .footer-cols { grid-template-columns: 1fr; }
+    .scroll-square { right: 20px; bottom: 20px; }
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="scroll-square" aria-hidden="true"></div>
+
+<template id="page-template">
+  <div class="page">
+    <header class="site-header">
+      <a href="#top" class="logo">
+        <span class="logo-dot"></span>
+        <span>prodev.team</span>
+      </a>
+      <nav class="site-nav">
+        <a href="#about" data-i18n="navAbout"></a>
+        <a href="#services" data-i18n="navServices"></a>
+        <a href="#stack" data-i18n="navStack"></a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang-btn="ru">RU</button>
+          <button type="button" data-lang-btn="en">EN</button>
+        </div>
+        <a class="btn btn-dark" data-tg data-i18n="ctaHeader"></a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-shape-ring" aria-hidden="true"></div>
+      <div class="hero-shape-dot" aria-hidden="true"></div>
+      <div class="hero-shape-square" aria-hidden="true"></div>
+      <p class="hero-kicker" data-i18n="kicker"></p>
+      <div class="hero-grid">
+        <h1 data-i18n="heroTitle"></h1>
+        <div class="hero-side">
+          <p data-i18n="heroText"></p>
+          <div class="hero-cta">
+            <a class="btn btn-dark btn-wide" data-tg data-i18n="ctaDiscuss"></a>
+            <a class="btn btn-outline btn-wide" href="#services" data-i18n="ctaServices"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="terminal-section">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="light"></span>
+          <span class="light"></span>
+          <span class="light light-accent"></span>
+          <span class="terminal-title">prodev — deploy</span>
+        </div>
+        <div class="terminal-body" data-terminal aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-inner about-grid">
+        <div class="about-head">
+          <h2 data-i18n="aboutTitle"></h2>
+          <div class="about-shapes" aria-hidden="true">
+            <span class="shape-circle-fill"></span>
+            <span class="shape-circle-line"></span>
+            <span class="shape-square-fill"></span>
+            <span class="shape-square-line"></span>
+          </div>
+        </div>
+        <div class="about-text">
+          <p data-i18n="aboutP1"></p>
+          <p data-i18n="aboutP2"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="section-inner">
+        <h2 data-i18n="servicesTitle"></h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="icon-circle" aria-hidden="true"></span>
+            <h3 data-i18n="svc1Title"></h3>
+            <p data-i18n="svc1Text"></p>
+          </div>
+          <div class="service-card">
+            <span class="icon-square-line" aria-hidden="true"></span>
+            <h3 data-i18n="svc2Title"></h3>
+            <p data-i18n="svc2Text"></p>
+          </div>
+          <div class="service-card">
+            <span class="icon-diamond" aria-hidden="true"></span>
+            <h3 data-i18n="svc3Title"></h3>
+            <p data-i18n="svc3Text"></p>
+          </div>
+          <div class="service-card">
+            <span class="icon-arch" aria-hidden="true"></span>
+            <h3 data-i18n="svc4Title"></h3>
+            <p data-i18n="svc4Text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="section">
+      <div class="section-inner">
+        <h2 data-i18n="stackTitle"></h2>
+        <div class="stack-grid">
+          <div class="stack-col">
+            <h3><span class="stack-dot-accent" aria-hidden="true"></span><span data-i18n="stackFront"></span></h3>
+            <p>TypeScript · React · Next.js · Tailwind CSS</p>
+          </div>
+          <div class="stack-col">
+            <h3><span class="stack-dot-ink" aria-hidden="true"></span><span data-i18n="stackBack"></span></h3>
+            <p>Node.js · PostgreSQL · Redis · REST / GraphQL</p>
+          </div>
+          <div class="stack-col">
+            <h3><span class="stack-dot-ring" aria-hidden="true"></span><span data-i18n="stackInfra"></span></h3>
+            <p>Docker · CI/CD · Vercel · VPS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta">
+        <div class="cta-shape-ring" aria-hidden="true"></div>
+        <div class="cta-shape-dot" aria-hidden="true"></div>
+        <div class="cta-inner">
+          <h2 data-i18n="ctaTitle"></h2>
+          <p data-i18n="ctaText"></p>
+          <a class="btn btn-light btn-wide" data-tg data-i18n="ctaHeader"></a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-dot"></span>
+            <span>prodev.team</span>
+          </div>
+          <div class="footer-meta">
+            <span class="footer-copy">© 2026 prodev.team</span>
+            <div class="footer-social">
+              <a data-tg>Telegram</a>
+              <a href="#top">GitHub</a>
+              <a href="#top">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <span class="footer-col-title" data-i18n="servicesTitle"></span>
+            <a href="#services" data-i18n="svc1Title"></a>
+            <a href="#services" data-i18n="svc2Title"></a>
+            <a href="#services" data-i18n="svc3Title"></a>
+            <a href="#services" data-i18n="svc4Title"></a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-title" data-i18n="footCompany"></span>
+            <a href="#about" data-i18n="aboutTitle"></a>
+            <a href="#stack" data-i18n="stackTitle"></a>
+            <a href="#top" data-i18n="footTop"></a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-title" data-i18n="footContact"></span>
+            <a data-tg data-i18n="ctaHeader"></a>
+            <span class="footer-note" data-i18n="footReply"></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</template>
+
+<script>
+(function () {
+  'use strict';
+
+  var TELEGRAM_HANDLE = 'your_handle';
+  var DEFAULT_LANG = 'ru';
+  var TG_LINK = 'https://t.me/' + TELEGRAM_HANDLE;
+
+  var I18N = {
+    ru: {
+      navAbout: 'О команде',
+      navServices: 'Услуги',
+      navStack: 'Стек',
+      ctaHeader: 'Написать в Telegram',
+      kicker: 'Студия full-stack разработки · работаем удалённо',
+      heroTitle: 'Цифровые продукты, которые запускаются в срок.',
+      heroText: 'Команда инженеров и дизайнеров: проектируем, разрабатываем и запускаем веб-приложения, лендинги и MVP. Полный цикл — от идеи до продакшена.',
+      ctaDiscuss: 'Обсудить проект',
+      ctaServices: 'Смотреть услуги',
+      aboutTitle: 'О команде',
+      aboutP1: 'Мы — компактная команда разработчиков и дизайнера. Берём проект целиком и ведём его до продакшена: без посредников, вы общаетесь напрямую с теми, кто делает продукт.',
+      aboutP2: 'Работаем итерациями: сначала версия, которую можно показать пользователям, затем развитие на основе реальных данных. Фиксируем сроки и объём до старта — и придерживаемся их.',
+      servicesTitle: 'Услуги',
+      svc1Title: 'MVP под ключ',
+      svc1Text: 'От идеи до продукта, который можно показывать инвесторам и первым пользователям. Архитектура, разработка, запуск — в согласованные сроки.',
+      svc2Title: 'Лендинги и сайты',
+      svc2Text: 'Страницы, которые доносят оффер и конвертируют: запуск продукта, услуга, портфолио. Вёрстка, формы, аналитика — всё включено.',
+      svc3Title: 'Веб-приложения',
+      svc3Text: 'Личные кабинеты, админки, внутренние инструменты. Фронтенд и бэкенд из одних рук — с авторизацией, базой данных и интеграциями.',
+      svc4Title: 'Поддержка и развитие',
+      svc4Text: 'Возьмём существующий проект: исправим баги, ускорим, добавим функциональность. Аудит кода перед стартом — бесплатно.',
+      stackTitle: 'Стек технологий',
+      stackFront: 'Фронтенд',
+      stackBack: 'Бэкенд',
+      stackInfra: 'Инфраструктура',
+      ctaTitle: 'Расскажите о задаче',
+      ctaText: 'Опишите её в двух словах — вернёмся в течение дня с оценкой сроков и стоимости.',
+      footCompany: 'Компания',
+      footTop: 'Наверх',
+      footContact: 'Контакты',
+      footReply: 'Отвечаем в течение дня'
+    },
+    en: {
+      navAbout: 'About',
+      navServices: 'Services',
+      navStack: 'Stack',
+      ctaHeader: 'Message on Telegram',
+      kicker: 'Full-stack development studio · fully remote',
+      heroTitle: 'Digital products that ship on time.',
+      heroText: 'A team of engineers and designers: we plan, build and launch web apps, landing pages and MVPs. Full cycle — from idea to production.',
+      ctaDiscuss: 'Discuss a project',
+      ctaServices: 'View services',
+      aboutTitle: 'About the team',
+      aboutP1: "We're a compact team of developers and a designer. We take a project end to end and ship it to production — no middlemen, you talk directly to the people building your product.",
+      aboutP2: 'We work in iterations: first a version you can put in front of users, then improvements driven by real data. Scope and timeline are fixed before we start — and we stick to them.',
+      servicesTitle: 'Services',
+      svc1Title: 'Turnkey MVP',
+      svc1Text: 'From idea to a product you can show investors and first users. Architecture, development, launch — within an agreed timeline.',
+      svc2Title: 'Landing pages & sites',
+      svc2Text: 'Pages that communicate the offer and convert: product launches, services, portfolios. Markup, forms, analytics — all included.',
+      svc3Title: 'Web applications',
+      svc3Text: 'Dashboards, admin panels, internal tools. Frontend and backend from one team — with auth, a database and integrations.',
+      svc4Title: 'Support & growth',
+      svc4Text: "We'll take over an existing project: fix bugs, improve performance, add features. Code audit before we start — free.",
+      stackTitle: 'Tech stack',
+      stackFront: 'Frontend',
+      stackBack: 'Backend',
+      stackInfra: 'Infrastructure',
+      ctaTitle: 'Tell us about your project',
+      ctaText: "Describe it in a couple of sentences — we'll get back within a day with a time and cost estimate.",
+      footCompany: 'Company',
+      footTop: 'Back to top',
+      footContact: 'Contact',
+      footReply: 'We reply within a day'
+    }
+  };
+
+  function terminalScript(isRu) {
+    return [
+      { type: 'cmd', text: 'git clone your-idea && cd your-idea' },
+      { type: 'ok', text: isRu ? 'скоуп и оценка — 1 день' : 'scope & estimate — 1 day' },
+      { type: 'cmd', text: 'npm run build' },
+      { type: 'ok', text: 'frontend · react + typescript' },
+      { type: 'ok', text: 'backend · node + postgres' },
+      { type: 'ok', text: isRu ? 'тесты пройдены (128/128)' : 'tests passed (128/128)' },
+      { type: 'cmd', text: 'npm run deploy --production' },
+      { type: 'info', text: isRu ? 'деплой в продакшен…' : 'deploying to production…' },
+      { type: 'ok', text: isRu ? 'запущено: от идеи до продакшена за недели, не месяцы' : 'live: from idea to production in weeks, not months' }
+    ];
+  }
+
+  var STATUS_COST = 12;
+  var LOOP_PAUSE = 90;
+  var TICK_MS = 45;
+
+  function totalSteps() {
+    return terminalScript(true).reduce(function (n, line) {
+      return n + (line.type === 'cmd' ? line.text.length : STATUS_COST);
+    }, 0);
+  }
+
+  function renderTerminal(el, isRu, step) {
+    var script = terminalScript(isRu);
+    var html = '';
+    var consumed = 0;
+    for (var i = 0; i < script.length; i++) {
+      var line = script[i];
+      var cost = line.type === 'cmd' ? line.text.length : STATUS_COST;
+      if (step <= consumed) break;
+      var avail = step - consumed;
+      var isLast = avail < cost;
+      if (line.type === 'cmd') {
+        var txt = isLast ? line.text.slice(0, avail) : line.text;
+        html += '<div><span class="t-prompt">$ </span><span class="t-cmd">' + txt + '</span></div>';
+      } else if (isLast) {
+        break;
+      } else {
+        var prefix = line.type === 'ok' ? '✓ ' : '→ ';
+        html += '<div><span class="t-' + line.type + '">  ' + prefix + '</span><span class="t-text">' + line.text + '</span></div>';
+      }
+      if (isLast) break;
+      consumed += cost;
+    }
+    var blinkOn = Math.floor(step / 10) % 2 === 0;
+    html += '<span class="terminal-cursor' + (blinkOn ? '' : ' off') + '"></span>';
+    el.innerHTML = html;
+  }
+
+  /* ---------- Page assembly ---------- */
+
+  var lang;
+  try { lang = localStorage.getItem('prodev_lang'); } catch (e) { lang = null; }
+  if (lang !== 'ru' && lang !== 'en') lang = DEFAULT_LANG;
+
+  var template = document.getElementById('page-template');
+  document.body.appendChild(template.content.cloneNode(true));
+
+  var terminalEl = document.querySelector('[data-terminal]');
+
+  function applyLang(l) {
+    lang = l;
+    try { localStorage.setItem('prodev_lang', l); } catch (e) {}
+    document.documentElement.lang = l;
+    var dict = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      el.textContent = dict[el.getAttribute('data-i18n')];
+    });
+    document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === l);
+    });
+    document.title = l === 'ru'
+      ? 'prodev.team — студия full-stack разработки'
+      : 'prodev.team — full-stack development studio';
+  }
+
+  document.querySelectorAll('[data-tg]').forEach(function (a) {
+    a.href = TG_LINK;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyLang(btn.getAttribute('data-lang-btn'));
+    });
+  });
+
+  applyLang(lang);
+
+  var squareEl = document.querySelector('.scroll-square');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onScroll() {
+    if (!squareEl || reduceMotion) return;
+    var doc = document.documentElement;
+    var max = Math.max(1, doc.scrollHeight - window.innerHeight);
+    var p = Math.min(1, Math.max(0, window.scrollY / max));
+    squareEl.style.transform = 'rotate(' + (p * 540) + 'deg)';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var step = 0;
+  var total = totalSteps();
+  renderTerminal(terminalEl, lang === 'ru', step);
+  setInterval(function () {
+    step = step >= total + LOOP_PAUSE ? 0 : step + 1;
+    renderTerminal(terminalEl, lang === 'ru', step);
+  }, TICK_MS);
+})();
+</script>
+</body>
+</html>
