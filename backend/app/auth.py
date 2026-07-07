@@ -1,9 +1,17 @@
+import os
+
 from fastapi import APIRouter, HTTPException, Request, Response
 from itsdangerous import BadSignature, TimestampSigner
 from pydantic import BaseModel
 
 COOKIE_NAME = "prodev_session"
 MAX_AGE = 60 * 60 * 24  # сутки
+
+
+def _cookie_secure() -> bool:
+    # Включайте COOKIE_SECURE=1 на проде за HTTPS; по умолчанию выключено,
+    # иначе браузер не примет cookie при локальной работе по http
+    return os.environ.get("COOKIE_SECURE", "0") == "1"
 
 router = APIRouter(prefix="/api/auth")
 
@@ -32,14 +40,19 @@ def login(body: LoginBody, request: Request, response: Response):
         raise HTTPException(status_code=401, detail="Неверный пароль")
     token = _signer(request).sign("admin").decode()
     response.set_cookie(
-        COOKIE_NAME, token, max_age=MAX_AGE, httponly=True, samesite="lax"
+        COOKIE_NAME,
+        token,
+        max_age=MAX_AGE,
+        httponly=True,
+        samesite="lax",
+        secure=_cookie_secure(),
     )
     return {"ok": True}
 
 
 @router.post("/logout")
 def logout(response: Response):
-    response.delete_cookie(COOKIE_NAME)
+    response.delete_cookie(COOKIE_NAME, httponly=True, samesite="lax", secure=_cookie_secure())
     return {"ok": True}
 
 

@@ -43,15 +43,20 @@ def create_app() -> FastAPI:
 
     static_dir = os.environ.get("STATIC_DIR", "")
     if static_dir and Path(static_dir).is_dir():
-        static = Path(static_dir)
-        app.mount("/assets", StaticFiles(directory=static / "assets"), name="assets")
+        static_root = Path(static_dir).resolve()
+        app.mount("/assets", StaticFiles(directory=static_root / "assets"), name="assets")
 
         @app.get("/{path:path}", include_in_schema=False)
         def spa(path: str):
-            file = static / path
-            if path and file.is_file():
-                return FileResponse(file)
-            return FileResponse(static / "index.html")
+            if path:
+                candidate = (static_root / path).resolve()
+                try:
+                    candidate.relative_to(static_root)
+                except ValueError:
+                    return FileResponse(static_root / "index.html")
+                if candidate.is_file():
+                    return FileResponse(candidate)
+            return FileResponse(static_root / "index.html")
 
     return app
 
