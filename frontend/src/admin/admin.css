@@ -61,6 +61,70 @@
 .admin-term-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .admin-danger { background: #b3261e; }
 .admin-add { margin-top: 16px; font: inherit; cursor: pointer; border: none; border-radius: 10px; padding: 10px 16px; background: var(--ink); color: var(--paper); }
+.admin-tabs { display: flex; gap: 8px; margin-bottom: 28px; }
+.admin-tabs button {
+  font: inherit;
+  cursor: pointer;
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+}
+.admin-tabs button.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.admin-lead {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.admin-lead.done { opacity: 0.55; }
+.admin-lead-head { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-size: 14px; }
+.admin-lead-head button {
+  margin-left: auto;
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 12px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.admin-lead p { margin: 10px 0 0; font-size: 15px; }
+.admin-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.admin-card img { width: 100%; border-radius: 8px; }
+.admin-card-fields, .admin-card-form { display: flex; flex-direction: column; gap: 10px; }
+.admin-card-fields input[type="text"], .admin-card-fields input:not([type]),
+.admin-card-form input:not([type="file"]), .admin-card-fields textarea, .admin-card-form textarea {
+  font: inherit;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.admin-card-fields label, .admin-card-form label { font-size: 14px; display: flex; gap: 8px; align-items: center; }
+.admin-card-form { max-width: 520px; }
+.admin-card-form button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--paper);
+}
+@media (max-width: 800px) {
+  .admin-card { grid-template-columns: 1fr; }
+}
 @media (max-width: 800px) {
   .admin-row, .admin-row-term { grid-template-columns: 1fr; }
 }

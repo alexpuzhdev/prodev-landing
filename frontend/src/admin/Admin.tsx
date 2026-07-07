@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { fetchContent, fetchTerminal } from '../content'
 import type { ContentMap, TermLine } from '../content'
+import { Leads } from './Leads'
+import { Portfolio } from './Portfolio'
+
+type Tab = 'texts' | 'leads' | 'portfolio'
 
 type Status = 'idle' | 'saving' | 'saved' | 'error'
 type RowState = { ru: string; en: string; status: Status }
@@ -47,6 +51,7 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 
 export function Admin() {
   const [authed, setAuthed] = useState<boolean | null>(null)
+  const [tab, setTab] = useState<Tab>('texts')
   const [texts, setTexts] = useState<ContentMap>({})
   const [rows, setRows] = useState<Record<string, RowState>>({})
   const [termRows, setTermRows] = useState<TermRow[]>([])
@@ -155,8 +160,26 @@ export function Admin() {
 
   return (
     <div className="admin">
-      <h1>Тексты лендинга</h1>
-      {[...sections.entries()].map(([section, keys]) => (
+      <h1>Админка atrice</h1>
+      <div className="admin-tabs">
+        <button className={tab === 'texts' ? 'active' : ''} onClick={() => setTab('texts')}>
+          Тексты
+        </button>
+        <button className={tab === 'leads' ? 'active' : ''} onClick={() => setTab('leads')}>
+          Заявки
+        </button>
+        <button
+          className={tab === 'portfolio' ? 'active' : ''}
+          onClick={() => setTab('portfolio')}
+        >
+          Портфолио
+        </button>
+      </div>
+
+      {tab === 'leads' && <Leads onAuthLost={() => setAuthed(false)} />}
+      {tab === 'portfolio' && <Portfolio onAuthLost={() => setAuthed(false)} />}
+
+      {tab === 'texts' && [...sections.entries()].map(([section, keys]) => (
         <section key={section}>
           <h2>{section}</h2>
           {keys.map((key) => {
@@ -193,6 +216,7 @@ export function Admin() {
         </section>
       ))}
 
+      {tab === 'texts' && (
       <section>
         <h2>Терминал: сценарий</h2>
         <p className="admin-hint">
@@ -238,6 +262,7 @@ export function Admin() {
         </button>
         {termError && <div className="admin-error">{termError}</div>}
       </section>
+      )}
     </div>
   )
 }
