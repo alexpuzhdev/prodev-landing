@@ -3,6 +3,8 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -38,6 +40,19 @@ def create_app() -> FastAPI:
 
     app.include_router(content.router)
     app.include_router(auth.router)
+
+    static_dir = os.environ.get("STATIC_DIR", "")
+    if static_dir and Path(static_dir).is_dir():
+        static = Path(static_dir)
+        app.mount("/assets", StaticFiles(directory=static / "assets"), name="assets")
+
+        @app.get("/{path:path}", include_in_schema=False)
+        def spa(path: str):
+            file = static / path
+            if path and file.is_file():
+                return FileResponse(file)
+            return FileResponse(static / "index.html")
+
     return app
 
 
