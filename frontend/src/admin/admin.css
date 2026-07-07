@@ -48,6 +48,19 @@
 .admin-row .admin-key { display: block; font-size: 12px; opacity: 0.6; }
 .admin-error { color: #b3261e; font-size: 14px; }
 .admin-saved { color: #2e7d32; font-size: 14px; }
+.admin-hint { font-size: 14px; opacity: 0.7; margin: 0 0 12px; }
+.admin-row-term { grid-template-columns: 130px 1fr 1fr 200px; }
+.admin-row-term select {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.admin-term-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.admin-danger { background: #b3261e; }
+.admin-add { margin-top: 16px; font: inherit; cursor: pointer; border: none; border-radius: 10px; padding: 10px 16px; background: var(--ink); color: var(--paper); }
 @media (max-width: 800px) {
-  .admin-row { grid-template-columns: 1fr; }
+  .admin-row, .admin-row-term { grid-template-columns: 1fr; }
 }

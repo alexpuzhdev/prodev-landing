@@ -8,10 +8,10 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from . import auth, content
+from . import auth, content, terminal
 from .migrations import run_migrations
 from .models import Base
-from .seed import seed_if_empty
+from .seed import seed_if_empty, seed_terminal_if_empty
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,6 +20,11 @@ def create_app() -> FastAPI:
     db_path = Path(os.environ.get("DB_PATH", BACKEND_DIR / "data" / "content.db"))
     seed_path = Path(
         os.environ.get("SEED_PATH", BACKEND_DIR.parent / "shared" / "seed_content.json")
+    )
+    terminal_seed_path = Path(
+        os.environ.get(
+            "SEED_TERMINAL_PATH", BACKEND_DIR.parent / "shared" / "seed_terminal.json"
+        )
     )
 
     db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -33,6 +38,7 @@ def create_app() -> FastAPI:
         with app.state.sessionmaker() as session:
             seed_if_empty(session, seed_path)
             run_migrations(session)
+            seed_terminal_if_empty(session, terminal_seed_path)
         yield
 
     app = FastAPI(title="prodev-landing", lifespan=lifespan)
@@ -42,6 +48,7 @@ def create_app() -> FastAPI:
 
     app.include_router(content.router)
     app.include_router(auth.router)
+    app.include_router(terminal.router)
 
     static_dir = os.environ.get("STATIC_DIR", "")
     if static_dir and Path(static_dir).is_dir():

@@ -15,6 +15,7 @@ RUN pip install --no-cache-dir ./backend
 COPY --from=frontend /build/frontend/dist frontend/dist
 ENV DB_PATH=/srv/data/content.db \
     SEED_PATH=/srv/shared/seed_content.json \
+    SEED_TERMINAL_PATH=/srv/shared/seed_terminal.json \
     STATIC_DIR=/srv/frontend/dist
 EXPOSE 8000
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--app-dir", "backend"]

@@ -1,0 +1,11 @@
+[
+  {"kind": "cmd",  "ru": "git clone your-idea && cd your-idea", "en": "git clone your-idea && cd your-idea"},
+  {"kind": "ok",   "ru": "скоуп и оценка - 1 день", "en": "scope & estimate - 1 day"},
+  {"kind": "cmd",  "ru": "npm run build", "en": "npm run build"},
+  {"kind": "ok",   "ru": "frontend · react + typescript", "en": "frontend · react + typescript"},
+  {"kind": "ok",   "ru": "backend · node + postgres", "en": "backend · node + postgres"},
+  {"kind": "ok",   "ru": "тесты пройдены (128/128)", "en": "tests passed (128/128)"},
+  {"kind": "cmd",  "ru": "npm run deploy --production", "en": "npm run deploy --production"},
+  {"kind": "info", "ru": "деплой в продакшен…", "en": "deploying to production…"},
+  {"kind": "ok",   "ru": "запущено: от идеи до продакшена за недели, не месяцы", "en": "live: from idea to production in weeks, not months"}
+]

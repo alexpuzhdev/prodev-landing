@@ -12,12 +12,6 @@
   "ctaServices":   {"ru": "Смотреть услуги", "en": "View services", "label": "Кнопка \"услуги\"", "section": "Hero"},
 
   "termTitle":     {"ru": "atrice - deploy", "en": "atrice - deploy", "label": "Заголовок окна терминала", "section": "Терминал"},
-  "termScope":     {"ru": "скоуп и оценка - 1 день", "en": "scope & estimate - 1 day", "label": "Строка: скоуп", "section": "Терминал"},
-  "termStack1":    {"ru": "frontend · react + typescript", "en": "frontend · react + typescript", "label": "Строка: фронтенд", "section": "Терминал"},
-  "termStack2":    {"ru": "backend · node + postgres", "en": "backend · node + postgres", "label": "Строка: бэкенд", "section": "Терминал"},
-  "termTests":     {"ru": "тесты пройдены (128/128)", "en": "tests passed (128/128)", "label": "Строка: тесты", "section": "Терминал"},
-  "termDeploying": {"ru": "деплой в продакшен…", "en": "deploying to production…", "label": "Строка: деплой", "section": "Терминал"},
-  "termLive":      {"ru": "запущено: от идеи до продакшена за недели, не месяцы", "en": "live: from idea to production in weeks, not months", "label": "Строка: запущено", "section": "Терминал"},
 
   "aboutTitle":    {"ru": "О команде", "en": "About the team", "label": "Заголовок секции", "section": "О команде"},
   "aboutP1":       {"ru": "Мы - компактная команда разработчиков и дизайнера. Берём проект целиком и ведём его до продакшена: без посредников, вы общаетесь напрямую с теми, кто делает продукт.", "en": "We're a compact team of developers and a designer. We take a project end to end and ship it to production - no middlemen, you talk directly to the people building your product.", "label": "Абзац 1", "section": "О команде"},

@@ -5,7 +5,7 @@ def test_get_content_returns_seeded_texts(client):
     assert data["heroTitle"]["ru"] == "Цифровые продукты, которые запускаются в срок."
     assert data["heroTitle"]["en"] == "Digital products that ship on time."
     assert data["heroTitle"]["section"] == "Hero"
-    assert len(data) >= 40
+    assert len(data) >= 35
 
 
 def test_put_content_requires_auth(client):

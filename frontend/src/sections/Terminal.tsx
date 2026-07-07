@@ -2,36 +2,25 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactElement } from 'react'
 import { useContent } from '../content'
 
-type Line = { type: 'cmd' | 'ok' | 'info'; text: string }
+type Line = { type: string; text: string }
 
 const STATUS_COST = 12
 const LOOP_PAUSE = 90
 const TICK_MS = 45
-
-export function terminalLines(t: (k: string) => string): Line[] {
-  return [
-    { type: 'cmd', text: 'git clone your-idea && cd your-idea' },
-    { type: 'ok', text: t('termScope') },
-    { type: 'cmd', text: 'npm run build' },
-    { type: 'ok', text: t('termStack1') },
-    { type: 'ok', text: t('termStack2') },
-    { type: 'ok', text: t('termTests') },
-    { type: 'cmd', text: 'npm run deploy --production' },
-    { type: 'info', text: t('termDeploying') },
-    { type: 'ok', text: t('termLive') },
-  ]
-}
 
 function totalSteps(lines: Line[]): number {
   return lines.reduce((n, l) => n + (l.type === 'cmd' ? l.text.length : STATUS_COST), 0)
 }
 
 export function Terminal() {
-  const { t, lang } = useContent()
+  const { t, lang, terminal } = useContent()
   const [step, setStep] = useState(0)
   const bodyRef = useRef<HTMLDivElement>(null)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const lines = useMemo(() => terminalLines(t), [t, lang])
+
+  const lines = useMemo<Line[]>(
+    () => terminal.map((l) => ({ type: l.kind, text: lang === 'ru' ? l.ru : l.en })),
+    [terminal, lang],
+  )
   const total = useMemo(() => totalSteps(lines), [lines])
 
   useEffect(() => {
