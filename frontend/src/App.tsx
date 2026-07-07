@@ -1,10 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ContentProvider, useContent } from './content'
-
-function Landing() {
-  const { t } = useContent()
-  return <h1>{t('heroTitle')}</h1>
-}
+import { ContentProvider } from './content'
+import { Landing } from './sections/Landing'
 
 export default function App() {
   return (
