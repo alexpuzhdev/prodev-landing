@@ -19,7 +19,7 @@ jobs:
           if [ -n "$VPS_HOST" ]; then
             echo "ok=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Секреты VPS не заданы — деплой пропущен."
+            echo "Секреты VPS не заданы - деплой пропущен."
           fi
       - name: Деплой по SSH
         if: steps.check.outputs.ok == 'true'

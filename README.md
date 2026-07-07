@@ -24,15 +24,15 @@ cd frontend && npm install && npm run dev   # http://localhost:5173, /api про
 ## Деплой
 
 Прод: http://91.207.75.217:8000 (пользователь `deploy`, каталог `~/prodev-landing`).
-Каждый пуш в `main` после зелёного CI автоматически деплоится на VPS
-(GitHub Actions → SSH → `git pull && docker compose up -d --build`).
+Каждый пуш в `main` после зеленого CI автоматически деплоится на VPS: GitHub Actions
+заходит по SSH и выполняет `git pull && docker compose up -d --build`.
 Секреты: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY` в настройках репозитория.
 
 ## Как это устроено
 
 - Все тексты лендинга (RU/EN) лежат в SQLite и редактируются через `/admin`.
-- Начальное наполнение — `shared/seed_content.json`; он же вшит во фронт как
+- Начальное наполнение - `shared/seed_content.json`; он же вшит во фронт как
   фоллбэк на случай недоступного API.
 - Миграции данных (`backend/app/migrations.py`) применяются на старте,
   каждая один раз; применённые фиксируются в таблице `applied_migrations`.
-- Один Docker-контейнер: FastAPI раздаёт и API, и собранную SPA.
+- Один Docker-контейнер: FastAPI раздает и API, и собранную SPA.
