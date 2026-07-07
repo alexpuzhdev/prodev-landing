@@ -1,10 +1,15 @@
 """Миграции данных: применяются на старте, каждая ровно один раз."""
 
+import json
+import os
 from datetime import datetime
+from pathlib import Path
 
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from .models import Base, Content, TerminalLine, utcnow
+
+BACKEND_DIR = Path(__file__).resolve().parent.parent
 
 
 class AppliedMigration(Base):
@@ -239,6 +244,22 @@ def _006_stack_and_terminal(session: Session) -> None:
             line.updated_at = utcnow()
 
 
+def _007_bot_content(session: Session) -> None:
+    """Добавляет тексты Telegram-бота в существующие базы."""
+    seed_path = Path(
+        os.environ.get("SEED_PATH", BACKEND_DIR.parent / "shared" / "seed_content.json")
+    )
+    data = json.loads(seed_path.read_text(encoding="utf-8"))
+    for key, row in data.items():
+        if row.get("section") != "Бот" or session.get(Content, key) is not None:
+            continue
+        session.add(
+            Content(
+                key=key, ru=row["ru"], en=row["en"], label=row.get("label", key), section="Бот"
+            )
+        )
+
+
 MIGRATIONS = [
     ("001_rebrand_atrice", _001_rebrand_atrice),
     ("002_strip_ai_markers", _002_strip_ai_markers),
@@ -246,6 +267,7 @@ MIGRATIONS = [
     ("004_copy_update", _004_copy_update),
     ("005_copy_polish", _005_copy_polish),
     ("006_stack_and_terminal", _006_stack_and_terminal),
+    ("007_bot_content", _007_bot_content),
 ]
 
 
