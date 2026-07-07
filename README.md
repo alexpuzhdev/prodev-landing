@@ -1,6 +1,6 @@
-# prodev-landing
+# atrice landing
 
-Лендинг студии prodev.team: FastAPI + SQLite (тексты в БД, админка) и React + Vite SPA.
+Лендинг студии atrice: FastAPI + SQLite (тексты в БД, админка) и React + Vite SPA.
 
 ## Быстрый старт (Docker)
 
@@ -33,4 +33,6 @@ cd frontend && npm install && npm run dev   # http://localhost:5173, /api про
 - Все тексты лендинга (RU/EN) лежат в SQLite и редактируются через `/admin`.
 - Начальное наполнение — `shared/seed_content.json`; он же вшит во фронт как
   фоллбэк на случай недоступного API.
+- Миграции данных (`backend/app/migrations.py`) применяются на старте,
+  каждая один раз; применённые фиксируются в таблице `applied_migrations`.
 - Один Docker-контейнер: FastAPI раздаёт и API, и собранную SPA.

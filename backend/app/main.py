@@ -9,6 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from . import auth, content
+from .migrations import run_migrations
 from .models import Base
 from .seed import seed_if_empty
 
@@ -31,6 +32,7 @@ def create_app() -> FastAPI:
     async def lifespan(app: FastAPI):
         with app.state.sessionmaker() as session:
             seed_if_empty(session, seed_path)
+            run_migrations(session)
         yield
 
     app = FastAPI(title="prodev-landing", lifespan=lifespan)

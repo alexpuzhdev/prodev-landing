@@ -1,5 +1,5 @@
 {
-  "brandName":     {"ru": "prodev.team", "en": "prodev.team", "label": "Название студии", "section": "Шапка"},
+  "brandName":     {"ru": "atrice", "en": "atrice", "label": "Название студии", "section": "Шапка"},
   "navAbout":      {"ru": "О команде", "en": "About", "label": "Меню: о команде", "section": "Шапка"},
   "navServices":   {"ru": "Услуги", "en": "Services", "label": "Меню: услуги", "section": "Шапка"},
   "navStack":      {"ru": "Стек", "en": "Stack", "label": "Меню: стек", "section": "Шапка"},
@@ -11,7 +11,7 @@
   "ctaDiscuss":    {"ru": "Обсудить проект", "en": "Discuss a project", "label": "Кнопка «обсудить»", "section": "Hero"},
   "ctaServices":   {"ru": "Смотреть услуги", "en": "View services", "label": "Кнопка «услуги»", "section": "Hero"},
 
-  "termTitle":     {"ru": "prodev — deploy", "en": "prodev — deploy", "label": "Заголовок окна терминала", "section": "Терминал"},
+  "termTitle":     {"ru": "atrice — deploy", "en": "atrice — deploy", "label": "Заголовок окна терминала", "section": "Терминал"},
   "termScope":     {"ru": "скоуп и оценка — 1 день", "en": "scope & estimate — 1 day", "label": "Строка: скоуп", "section": "Терминал"},
   "termStack1":    {"ru": "frontend · react + typescript", "en": "frontend · react + typescript", "label": "Строка: фронтенд", "section": "Терминал"},
   "termStack2":    {"ru": "backend · node + postgres", "en": "backend · node + postgres", "label": "Строка: бэкенд", "section": "Терминал"},
@@ -48,7 +48,7 @@
   "footTop":       {"ru": "Наверх", "en": "Back to top", "label": "Ссылка «наверх»", "section": "Футер"},
   "footContact":   {"ru": "Контакты", "en": "Contact", "label": "Колонка «Контакты»", "section": "Футер"},
   "footReply":     {"ru": "Отвечаем в течение дня", "en": "We reply within a day", "label": "Строка про ответ", "section": "Футер"},
-  "footCopyright": {"ru": "© 2026 prodev.team", "en": "© 2026 prodev.team", "label": "Копирайт", "section": "Футер"},
+  "footCopyright": {"ru": "© 2026 atrice", "en": "© 2026 atrice", "label": "Копирайт", "section": "Футер"},
 
   "telegramHandle": {"ru": "your_handle", "en": "your_handle", "label": "Telegram-хэндл (без @)", "section": "Контакты"}
 }
