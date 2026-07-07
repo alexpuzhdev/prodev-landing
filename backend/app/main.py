@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from . import content
+from . import auth, content
 from .models import Base
 from .seed import seed_if_empty
 
@@ -37,6 +37,7 @@ def create_app() -> FastAPI:
     app.state.secret_key = os.environ.get("SECRET_KEY", "dev-secret-change-me")
 
     app.include_router(content.router)
+    app.include_router(auth.router)
     return app
 
 
