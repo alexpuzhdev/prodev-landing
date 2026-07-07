@@ -148,11 +148,71 @@ def _004_copy_update(session: Session) -> None:
             row.updated_at = utcnow()
 
 
+def _005_copy_polish(session: Session) -> None:
+    """Правка текстов: естественнее формулировки, упор на доверие без давления."""
+    texts = {
+        "heroText": (
+            "Проектируем, разрабатываем и запускаем веб-приложения, лендинги и MVP. "
+            "Ведём проект целиком: от постановки задачи до работающего продукта.",
+            "We design, build and launch web apps, landing pages and MVPs. "
+            "We run the project end to end: from scoping the task to a working product.",
+        ),
+        "aboutP1": (
+            "Ведём проект прозрачно: регулярные демо, понятные статусы и один "
+            "ответственный за результат. Если удобнее обсуждать детали напрямую с "
+            "разработчиками и дизайнером, такая возможность всегда есть.",
+            "We keep the project transparent: regular demos, clear status updates and "
+            "one person responsible for the result. And if you prefer to discuss details "
+            "directly with the developers and the designer, that option is always there.",
+        ),
+        "aboutP2": (
+            "Работаем итерациями: сначала версия, которую можно показать пользователям, "
+            "затем развитие на основе реальных данных. Объём и сроки фиксируем до старта "
+            "и не двигаем их по ходу.",
+            "We work in iterations: first a version you can show to users, then "
+            "improvements based on real data. Scope and deadlines are fixed before we "
+            "start and stay fixed.",
+        ),
+        "svc1Text": (
+            "Поможем довести идею до продукта, который можно показывать инвесторам и "
+            "первым пользователям. Архитектура, разработка и запуск в согласованные "
+            "сроки.",
+            "We help turn an idea into a product ready to show investors and first "
+            "users. Architecture, development and launch within the agreed timeline.",
+        ),
+        "svc2Text": (
+            "Страницы, которые ясно объясняют продукт и приводят заявки: запуск, услуга, "
+            "портфолио. Вёрстка, формы и аналитика входят в работу.",
+            "Pages that explain your product clearly and bring in leads: launches, "
+            "services, portfolios. Markup, forms and analytics are part of the job.",
+        ),
+        "svc3Text": (
+            "Личные кабинеты, админки и внутренние инструменты. Фронтенд и бэкенд делает "
+            "одна команда: авторизация, база данных, интеграции.",
+            "Dashboards, admin panels and internal tools. One team builds both frontend "
+            "and backend: auth, database, integrations.",
+        ),
+        "svc4Text": (
+            "Возьмём существующий проект: исправим баги, ускорим работу и добавим новые "
+            "функции. Начинаем с бесплатного аудита кода.",
+            "We take over existing projects: fix bugs, speed things up and add features. "
+            "We start with a free code audit.",
+        ),
+    }
+    for key, (ru, en) in texts.items():
+        row = session.get(Content, key)
+        if row is not None:
+            row.ru = ru
+            row.en = en
+            row.updated_at = utcnow()
+
+
 MIGRATIONS = [
     ("001_rebrand_atrice", _001_rebrand_atrice),
     ("002_strip_ai_markers", _002_strip_ai_markers),
     ("003_terminal_lines", _003_terminal_lines),
     ("004_copy_update", _004_copy_update),
+    ("005_copy_polish", _005_copy_polish),
 ]
 
 
