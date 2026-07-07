@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactElement } from 'react'
 import { useContent } from '../content'
 
@@ -29,6 +29,7 @@ function totalSteps(lines: Line[]): number {
 export function Terminal() {
   const { t, lang } = useContent()
   const [step, setStep] = useState(0)
+  const bodyRef = useRef<HTMLDivElement>(null)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const lines = useMemo(() => terminalLines(t), [t, lang])
   const total = useMemo(() => totalSteps(lines), [lines])
@@ -72,6 +73,11 @@ export function Terminal() {
   }
   const blinkOn = Math.floor(step / 10) % 2 === 0
 
+  useEffect(() => {
+    const el = bodyRef.current
+    if (el) el.scrollTop = el.scrollHeight
+  }, [step])
+
   return (
     <section className="terminal-section">
       <div className="terminal">
@@ -81,7 +87,7 @@ export function Terminal() {
           <span className="light light-accent"></span>
           <span className="terminal-title">{t('termTitle')}</span>
         </div>
-        <div className="terminal-body" aria-hidden="true">
+        <div className="terminal-body" aria-hidden="true" ref={bodyRef}>
           {rows}
           <span className={'terminal-cursor' + (blinkOn ? '' : ' off')}></span>
         </div>

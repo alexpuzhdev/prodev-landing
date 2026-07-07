@@ -248,7 +248,8 @@
   }
   .terminal-body {
     padding: 24px 28px;
-    min-height: 190px;
+    height: 260px;
+    overflow-y: hidden;
     font-family: var(--mono);
     font-size: 13.5px;
     line-height: 1.75;
