@@ -31,3 +31,29 @@ class TerminalLine(Base):
     ru: Mapped[str] = mapped_column(default="")
     en: Mapped[str] = mapped_column(default="")
     updated_at: Mapped[datetime] = mapped_column(default=utcnow)
+
+
+class Lead(Base):
+    __tablename__ = "leads"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    tg_user_id: Mapped[int] = mapped_column(default=0)
+    username: Mapped[str] = mapped_column(default="")
+    name: Mapped[str] = mapped_column(default="")
+    task: Mapped[str] = mapped_column(default="")
+    project_type: Mapped[str] = mapped_column(default="")
+    timeline: Mapped[str] = mapped_column(default="")
+    status: Mapped[str] = mapped_column(default="new")
+    created_at: Mapped[datetime] = mapped_column(default=utcnow)
+
+
+class PortfolioItem(Base):
+    __tablename__ = "portfolio_items"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    position: Mapped[int] = mapped_column(default=0)
+    title: Mapped[str] = mapped_column(default="")
+    text: Mapped[str] = mapped_column(default="")
+    image_path: Mapped[str] = mapped_column(default="")
+    enabled: Mapped[bool] = mapped_column(default=True)
+    updated_at: Mapped[datetime] = mapped_column(default=utcnow)

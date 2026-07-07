@@ -26,11 +26,14 @@ def client_ip(request: Request) -> str:
 
 def is_admin_request(request: Request) -> bool:
     path = request.url.path
+    method = request.method
+    if path == "/api/leads" and method == "POST":
+        return False
     if path == "/admin" or path.startswith("/admin/"):
         return True
-    if path.startswith("/api/auth"):
+    if path.startswith("/api/auth") or path.startswith("/api/leads"):
         return True
-    return path.startswith("/api/") and request.method not in SAFE_METHODS
+    return path.startswith("/api/") and method not in SAFE_METHODS
 
 
 def ip_allowed(ip: str, allowed: list[str]) -> bool:

@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from . import auth, content, terminal
+from . import auth, content, leads, portfolio, terminal
 from .access import allowed_ips, client_ip, ip_allowed, is_admin_request
 from .migrations import run_migrations
 from .models import Base
@@ -52,9 +52,17 @@ def create_app() -> FastAPI:
     app.state.sessionmaker = sessionmaker(bind=engine)
     app.state.admin_password = os.environ.get("ADMIN_PASSWORD", "admin")
     app.state.secret_key = os.environ.get("SECRET_KEY", "dev-secret-change-me")
+    app.state.service_token = os.environ.get("SERVICE_TOKEN", "")
+
+    uploads_path = Path(os.environ.get("UPLOADS_DIR", db_path.parent / "uploads"))
+    uploads_path.mkdir(parents=True, exist_ok=True)
+    app.state.uploads_dir = uploads_path
+    app.mount("/uploads", StaticFiles(directory=uploads_path), name="uploads")
 
     app.include_router(content.router)
     app.include_router(auth.router)
+    app.include_router(leads.router)
+    app.include_router(portfolio.router)
     app.include_router(terminal.router)
 
     allowed = allowed_ips()
