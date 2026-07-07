@@ -7,12 +7,12 @@
 
   "kicker":        {"ru": "Студия full-stack разработки · работаем удалённо", "en": "Full-stack development studio · fully remote", "label": "Подзаголовок над заголовком", "section": "Hero"},
   "heroTitle":     {"ru": "Цифровые продукты, которые запускаются в срок.", "en": "Digital products that ship on time.", "label": "Главный заголовок", "section": "Hero"},
-  "heroText":      {"ru": "Команда инженеров и дизайнеров: проектируем, разрабатываем и запускаем веб-приложения, лендинги и MVP. Полный цикл — от идеи до продакшена.", "en": "A team of engineers and designers: we plan, build and launch web apps, landing pages and MVPs. Full cycle — from idea to production.", "label": "Текст рядом с заголовком", "section": "Hero"},
-  "ctaDiscuss":    {"ru": "Обсудить проект", "en": "Discuss a project", "label": "Кнопка «обсудить»", "section": "Hero"},
-  "ctaServices":   {"ru": "Смотреть услуги", "en": "View services", "label": "Кнопка «услуги»", "section": "Hero"},
+  "heroText":      {"ru": "Команда инженеров и дизайнеров: проектируем, разрабатываем и запускаем веб-приложения, лендинги и MVP. Полный цикл - от идеи до продакшена.", "en": "A team of engineers and designers: we plan, build and launch web apps, landing pages and MVPs. Full cycle - from idea to production.", "label": "Текст рядом с заголовком", "section": "Hero"},
+  "ctaDiscuss":    {"ru": "Обсудить проект", "en": "Discuss a project", "label": "Кнопка \"обсудить\"", "section": "Hero"},
+  "ctaServices":   {"ru": "Смотреть услуги", "en": "View services", "label": "Кнопка \"услуги\"", "section": "Hero"},
 
-  "termTitle":     {"ru": "atrice — deploy", "en": "atrice — deploy", "label": "Заголовок окна терминала", "section": "Терминал"},
-  "termScope":     {"ru": "скоуп и оценка — 1 день", "en": "scope & estimate — 1 day", "label": "Строка: скоуп", "section": "Терминал"},
+  "termTitle":     {"ru": "atrice - deploy", "en": "atrice - deploy", "label": "Заголовок окна терминала", "section": "Терминал"},
+  "termScope":     {"ru": "скоуп и оценка - 1 день", "en": "scope & estimate - 1 day", "label": "Строка: скоуп", "section": "Терминал"},
   "termStack1":    {"ru": "frontend · react + typescript", "en": "frontend · react + typescript", "label": "Строка: фронтенд", "section": "Терминал"},
   "termStack2":    {"ru": "backend · node + postgres", "en": "backend · node + postgres", "label": "Строка: бэкенд", "section": "Терминал"},
   "termTests":     {"ru": "тесты пройдены (128/128)", "en": "tests passed (128/128)", "label": "Строка: тесты", "section": "Терминал"},
@@ -20,18 +20,18 @@
   "termLive":      {"ru": "запущено: от идеи до продакшена за недели, не месяцы", "en": "live: from idea to production in weeks, not months", "label": "Строка: запущено", "section": "Терминал"},
 
   "aboutTitle":    {"ru": "О команде", "en": "About the team", "label": "Заголовок секции", "section": "О команде"},
-  "aboutP1":       {"ru": "Мы — компактная команда разработчиков и дизайнера. Берём проект целиком и ведём его до продакшена: без посредников, вы общаетесь напрямую с теми, кто делает продукт.", "en": "We're a compact team of developers and a designer. We take a project end to end and ship it to production — no middlemen, you talk directly to the people building your product.", "label": "Абзац 1", "section": "О команде"},
-  "aboutP2":       {"ru": "Работаем итерациями: сначала версия, которую можно показать пользователям, затем развитие на основе реальных данных. Фиксируем сроки и объём до старта — и придерживаемся их.", "en": "We work in iterations: first a version you can put in front of users, then improvements driven by real data. Scope and timeline are fixed before we start — and we stick to them.", "label": "Абзац 2", "section": "О команде"},
+  "aboutP1":       {"ru": "Мы - компактная команда разработчиков и дизайнера. Берём проект целиком и ведём его до продакшена: без посредников, вы общаетесь напрямую с теми, кто делает продукт.", "en": "We're a compact team of developers and a designer. We take a project end to end and ship it to production - no middlemen, you talk directly to the people building your product.", "label": "Абзац 1", "section": "О команде"},
+  "aboutP2":       {"ru": "Работаем итерациями: сначала версия, которую можно показать пользователям, затем развитие на основе реальных данных. Фиксируем сроки и объём до старта - и придерживаемся их.", "en": "We work in iterations: first a version you can put in front of users, then improvements driven by real data. Scope and timeline are fixed before we start - and we stick to them.", "label": "Абзац 2", "section": "О команде"},
 
   "servicesTitle": {"ru": "Услуги", "en": "Services", "label": "Заголовок секции", "section": "Услуги"},
   "svc1Title":     {"ru": "MVP под ключ", "en": "Turnkey MVP", "label": "Карточка 1: заголовок", "section": "Услуги"},
-  "svc1Text":      {"ru": "От идеи до продукта, который можно показывать инвесторам и первым пользователям. Архитектура, разработка, запуск — в согласованные сроки.", "en": "From idea to a product you can show investors and first users. Architecture, development, launch — within an agreed timeline.", "label": "Карточка 1: текст", "section": "Услуги"},
+  "svc1Text":      {"ru": "От идеи до продукта, который можно показывать инвесторам и первым пользователям. Архитектура, разработка, запуск - в согласованные сроки.", "en": "From idea to a product you can show investors and first users. Architecture, development, launch - within an agreed timeline.", "label": "Карточка 1: текст", "section": "Услуги"},
   "svc2Title":     {"ru": "Лендинги и сайты", "en": "Landing pages & sites", "label": "Карточка 2: заголовок", "section": "Услуги"},
-  "svc2Text":      {"ru": "Страницы, которые доносят оффер и конвертируют: запуск продукта, услуга, портфолио. Вёрстка, формы, аналитика — всё включено.", "en": "Pages that communicate the offer and convert: product launches, services, portfolios. Markup, forms, analytics — all included.", "label": "Карточка 2: текст", "section": "Услуги"},
+  "svc2Text":      {"ru": "Страницы, которые доносят оффер и конвертируют: запуск продукта, услуга, портфолио. Вёрстка, формы, аналитика - всё включено.", "en": "Pages that communicate the offer and convert: product launches, services, portfolios. Markup, forms, analytics - all included.", "label": "Карточка 2: текст", "section": "Услуги"},
   "svc3Title":     {"ru": "Веб-приложения", "en": "Web applications", "label": "Карточка 3: заголовок", "section": "Услуги"},
-  "svc3Text":      {"ru": "Личные кабинеты, админки, внутренние инструменты. Фронтенд и бэкенд из одних рук — с авторизацией, базой данных и интеграциями.", "en": "Dashboards, admin panels, internal tools. Frontend and backend from one team — with auth, a database and integrations.", "label": "Карточка 3: текст", "section": "Услуги"},
+  "svc3Text":      {"ru": "Личные кабинеты, админки, внутренние инструменты. Фронтенд и бэкенд из одних рук - с авторизацией, базой данных и интеграциями.", "en": "Dashboards, admin panels, internal tools. Frontend and backend from one team - with auth, a database and integrations.", "label": "Карточка 3: текст", "section": "Услуги"},
   "svc4Title":     {"ru": "Поддержка и развитие", "en": "Support & growth", "label": "Карточка 4: заголовок", "section": "Услуги"},
-  "svc4Text":      {"ru": "Возьмём существующий проект: исправим баги, ускорим, добавим функциональность. Аудит кода перед стартом — бесплатно.", "en": "We'll take over an existing project: fix bugs, improve performance, add features. Code audit before we start — free.", "label": "Карточка 4: текст", "section": "Услуги"},
+  "svc4Text":      {"ru": "Возьмём существующий проект: исправим баги, ускорим, добавим функциональность. Аудит кода перед стартом - бесплатно.", "en": "We'll take over an existing project: fix bugs, improve performance, add features. Code audit before we start - free.", "label": "Карточка 4: текст", "section": "Услуги"},
 
   "stackTitle":      {"ru": "Стек технологий", "en": "Tech stack", "label": "Заголовок секции", "section": "Стек"},
   "stackFront":      {"ru": "Фронтенд", "en": "Frontend", "label": "Колонка 1: заголовок", "section": "Стек"},
@@ -42,11 +42,11 @@
   "stackInfraItems": {"ru": "Docker · CI/CD · Vercel · VPS", "en": "Docker · CI/CD · Vercel · VPS", "label": "Колонка 3: список", "section": "Стек"},
 
   "ctaTitle": {"ru": "Расскажите о задаче", "en": "Tell us about your project", "label": "Заголовок CTA", "section": "CTA"},
-  "ctaText":  {"ru": "Опишите её в двух словах — вернёмся в течение дня с оценкой сроков и стоимости.", "en": "Describe it in a couple of sentences — we'll get back within a day with a time and cost estimate.", "label": "Текст CTA", "section": "CTA"},
+  "ctaText":  {"ru": "Опишите её в двух словах - вернёмся в течение дня с оценкой сроков и стоимости.", "en": "Describe it in a couple of sentences - we'll get back within a day with a time and cost estimate.", "label": "Текст CTA", "section": "CTA"},
 
-  "footCompany":   {"ru": "Компания", "en": "Company", "label": "Колонка «Компания»", "section": "Футер"},
-  "footTop":       {"ru": "Наверх", "en": "Back to top", "label": "Ссылка «наверх»", "section": "Футер"},
-  "footContact":   {"ru": "Контакты", "en": "Contact", "label": "Колонка «Контакты»", "section": "Футер"},
+  "footCompany":   {"ru": "Компания", "en": "Company", "label": "Колонка \"Компания\"", "section": "Футер"},
+  "footTop":       {"ru": "Наверх", "en": "Back to top", "label": "Ссылка \"наверх\"", "section": "Футер"},
+  "footContact":   {"ru": "Контакты", "en": "Contact", "label": "Колонка \"Контакты\"", "section": "Футер"},
   "footReply":     {"ru": "Отвечаем в течение дня", "en": "We reply within a day", "label": "Строка про ответ", "section": "Футер"},
   "footCopyright": {"ru": "© 2026 atrice", "en": "© 2026 atrice", "label": "Копирайт", "section": "Футер"},
 
