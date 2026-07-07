@@ -2,13 +2,14 @@ import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from . import auth, content, terminal
+from .access import allowed_ips, client_ip, ip_allowed, is_admin_request
 from .migrations import run_migrations
 from .models import Base
 from .seed import seed_if_empty, seed_terminal_if_empty
@@ -49,6 +50,15 @@ def create_app() -> FastAPI:
     app.include_router(content.router)
     app.include_router(auth.router)
     app.include_router(terminal.router)
+
+    allowed = allowed_ips()
+    if allowed:
+
+        @app.middleware("http")
+        async def admin_gate(request: Request, call_next):
+            if is_admin_request(request) and not ip_allowed(client_ip(request), allowed):
+                return JSONResponse({"detail": "Not Found"}, status_code=404)
+            return await call_next(request)
 
     static_dir = os.environ.get("STATIC_DIR", "")
     if static_dir and Path(static_dir).is_dir():
