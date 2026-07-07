@@ -13,9 +13,14 @@ def allowed_ips() -> list[str]:
 
 
 def client_ip(request: Request) -> str:
-    forwarded = request.headers.get("x-forwarded-for", "")
-    if forwarded:
-        return forwarded.split(",")[0].strip()
+    """IP клиента из X-Real-IP: nginx всегда перезаписывает его на $remote_addr.
+
+    X-Forwarded-For не используем: nginx дополняет присланное клиентом значение,
+    и первый элемент списка может подделать сам клиент.
+    """
+    real_ip = request.headers.get("x-real-ip", "").strip()
+    if real_ip:
+        return real_ip
     return request.client.host if request.client else ""
 
 

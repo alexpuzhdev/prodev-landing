@@ -23,8 +23,9 @@ cd frontend && npm install && npm run dev   # http://localhost:5173, /api про
 
 ## Деплой
 
-Прод: https://alexander.puzh.dev.hlab.kz (nginx + Let's Encrypt, приложение слушает
+Прод: https://atrice.ru (nginx + Let's Encrypt, приложение слушает
 только 127.0.0.1:8000; пользователь `deploy`, каталог `~/prodev-landing`).
+www.atrice.ru и старый hostname сервера редиректят на atrice.ru.
 Каждый пуш в `main` после зеленого CI автоматически деплоится на VPS: GitHub Actions
 заходит по SSH и выполняет `git pull && docker compose up -d --build`.
 Секреты: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY` в настройках репозитория.
