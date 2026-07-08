@@ -4,7 +4,7 @@ from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 
-from . import keyboards, screen
+from . import keyboards, pager, screen
 from .backend import backend
 from .menu import FALLBACK_ERROR, texts
 
@@ -26,7 +26,7 @@ async def show_item(callback: CallbackQuery, state: FSMContext, idx: int) -> Non
         await screen.show_text(bot, chat_id, state, t["botPortfolioEmpty"], keyboards.back_menu(t))
         await callback.answer()
         return
-    idx = max(0, min(idx, len(items) - 1))
+    idx = pager.clamp(idx, len(items))
     item = items[idx]
     caption = f"<b>{item['title']}</b>\n\n{item['text']}"
     markup = keyboards.portfolio_nav(t, idx, len(items))

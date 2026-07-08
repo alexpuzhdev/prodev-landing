@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from . import config
+from . import config, pager
 
 
 def _two_columns(buttons: list[InlineKeyboardButton]) -> list[list[InlineKeyboardButton]]:
@@ -61,13 +61,7 @@ def about_menu(t: dict[str, str]) -> InlineKeyboardMarkup:
 
 
 def portfolio_nav(t: dict[str, str], idx: int, total: int) -> InlineKeyboardMarkup:
-    row = []
-    if idx > 0:
-        row.append(InlineKeyboardButton(text="◀", callback_data=f"portfolio:{idx - 1}"))
-    row.append(InlineKeyboardButton(text=f"{idx + 1}/{total}", callback_data="noop"))
-    if idx < total - 1:
-        row.append(InlineKeyboardButton(text="▶", callback_data=f"portfolio:{idx + 1}"))
-    return _with_nav([row], t)
+    return _with_nav([pager.nav_row("portfolio", idx, total)], t)
 
 
 def lead_types(t: dict[str, str]) -> InlineKeyboardMarkup:
