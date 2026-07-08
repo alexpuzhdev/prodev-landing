@@ -260,6 +260,21 @@ def _007_bot_content(session: Session) -> None:
         )
 
 
+def _008_bot_back_step(session: Session) -> None:
+    """Добавляет кнопку 'Назад' (шаг назад в анкете) в существующие базы."""
+    if session.get(Content, "botBackStep") is not None:
+        return
+    session.add(
+        Content(
+            key="botBackStep",
+            ru="Назад",
+            en="Назад",
+            label="Кнопка: шаг назад в анкете",
+            section="Бот",
+        )
+    )
+
+
 MIGRATIONS = [
     ("001_rebrand_atrice", _001_rebrand_atrice),
     ("002_strip_ai_markers", _002_strip_ai_markers),
@@ -268,6 +283,7 @@ MIGRATIONS = [
     ("005_copy_polish", _005_copy_polish),
     ("006_stack_and_terminal", _006_stack_and_terminal),
     ("007_bot_content", _007_bot_content),
+    ("008_bot_back_step", _008_bot_back_step),
 ]
 
 
