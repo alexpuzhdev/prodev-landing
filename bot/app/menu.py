@@ -1,11 +1,11 @@
 import logging
 
-from aiogram import F, Router
+from aiogram import Bot, F, Router
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from . import banners, keyboards
+from . import keyboards, screen
 from .backend import backend
 
 router = Router()
@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 KEYS = [
     "botWelcome", "botMenuPortfolio", "botMenuServices", "botMenuLead", "botMenuAbout",
-    "botBack", "botPortfolioEmpty", "botAboutSite", "botLeadAskTask", "botLeadAskType",
+    "botBack", "botBackStep", "botPortfolioEmpty", "botAboutSite", "botLeadAskTask", "botLeadAskType",
     "botLeadTypeMvp", "botLeadTypeLanding", "botLeadTypeWebapp", "botLeadTypeSupport",
     "botLeadAskTimeline", "botLeadConfirm", "botLeadSend", "botLeadCancel",
     "botLeadThanks", "botLeadCancelled", "botError",
@@ -34,16 +34,17 @@ async def texts() -> dict[str, str]:
     return result
 
 
-async def show_main(message: Message) -> None:
+async def show_main(bot: Bot, chat_id: int, state: FSMContext) -> None:
     t = await texts()
-    await banners.send(message, "welcome", t["botWelcome"], keyboards.main_menu(t))
+    await screen.show_banner(bot, chat_id, state, "welcome", t["botWelcome"], keyboards.main_menu(t))
 
 
 @router.message(CommandStart())
 async def start(message: Message, state: FSMContext) -> None:
-    await state.clear()
+    await screen.delete_user(message)
+    await screen.exit_flow(state)
     try:
-        await show_main(message)
+        await show_main(message.bot, message.chat.id, state)
     except Exception:
         log.exception("backend unavailable on start")
         await message.answer(FALLBACK_ERROR)
@@ -51,17 +52,18 @@ async def start(message: Message, state: FSMContext) -> None:
 
 @router.callback_query(F.data == "menu:main")
 async def to_main(callback: CallbackQuery, state: FSMContext) -> None:
-    await state.clear()
+    await screen.exit_flow(state)
     try:
-        await show_main(callback.message)
+        await show_main(callback.bot, callback.message.chat.id, state)
     except Exception:
         log.exception("backend unavailable on menu")
-        await callback.message.answer(FALLBACK_ERROR)
+        await callback.answer(FALLBACK_ERROR, show_alert=True)
+        return
     await callback.answer()
 
 
 @router.callback_query(F.data == "menu:services")
-async def services(callback: CallbackQuery) -> None:
+async def services(callback: CallbackQuery, state: FSMContext) -> None:
     try:
         t = await texts()
     except Exception:
@@ -70,12 +72,15 @@ async def services(callback: CallbackQuery) -> None:
         return
     lines = [f"<b>{t[f'svc{i}Title']}</b>\n{t[f'svc{i}Text']}" for i in (1, 2, 3, 4)]
     caption = "\n\n".join(lines)
-    await banners.send(callback.message, "services", caption, keyboards.services_menu(t))
+    await screen.show_banner(
+        callback.bot, callback.message.chat.id, state, "services", caption,
+        keyboards.services_menu(t),
+    )
     await callback.answer()
 
 
 @router.callback_query(F.data == "menu:about")
-async def about(callback: CallbackQuery) -> None:
+async def about(callback: CallbackQuery, state: FSMContext) -> None:
     try:
         t = await texts()
     except Exception:
@@ -83,7 +88,10 @@ async def about(callback: CallbackQuery) -> None:
         await callback.answer(FALLBACK_ERROR, show_alert=True)
         return
     caption = f"<b>{t['aboutTitle']}</b>\n\n{t['aboutP1']}\n\n{t['aboutP2']}"
-    await banners.send(callback.message, "about", caption, keyboards.about_menu(t))
+    await screen.show_banner(
+        callback.bot, callback.message.chat.id, state, "about", caption,
+        keyboards.about_menu(t),
+    )
     await callback.answer()
 
 
